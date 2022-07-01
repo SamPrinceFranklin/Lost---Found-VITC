@@ -56,7 +56,7 @@ export const Signup = () => {
        
 
         <br/><br/>
-        <div className='flex justify-center text-4xl text-black font-bold  '>LOGIN </div>
+        <div className='flex justify-center text-4xl text-black font-bold  '>Sign Up </div>
       
       {error &&  <div className='bg-red-700 text-white font-semibold flex flex-row p-1 text-xl justify-center'> {error} </div> }
 
