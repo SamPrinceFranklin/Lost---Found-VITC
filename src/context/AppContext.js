@@ -1,6 +1,15 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
+import { initializeApp } from "firebase/app";
 
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
 
+  signOut,
+} from "firebase/auth";
+
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export const AppContext = createContext();
 export const AppProvider = ({children}) =>{
@@ -9,7 +18,37 @@ export const AppProvider = ({children}) =>{
     const [lostdata,setlostdata] = useState([]);
     const [founddata,setfounddata] = useState([]);
     const [userdata,setuserdata] = useState([]);
-
+    const [loginerror,setloginerror] = useState(false)
+    const config = {
+        apiKey: "AIzaSyBKG1M55nwdRXyxzeKdj_Z3nicwBU_Y3PQ",
+        authDomain: "laf-app-da157.firebaseapp.com",
+        projectId: "laf-app-da157",
+        storageBucket: "laf-app-da157.appspot.com",
+        messagingSenderId: "18475991594",
+        appId: "1:18475991594:web:8725c3e01c2de7cfc6b953",
+        measurementId: "G-WZ954J3L0T"
+      };
+      const app = initializeApp(config);
+      const auth = getAuth(app);
+      const googleProvider = new GoogleAuthProvider();
+      const [user,loading] = useAuthState(auth)
+      const signInWithGoogle = async () => {
+        try {
+          const res = await signInWithPopup(auth, googleProvider);
+          const user = res.user;
+         if (user.email.includes("vitstudent.ac.in")||user.email.includes("vit.ac.in")  ){
+            setloggedinstatus(true);
+            setuserdata(user)
+         }
+         else{
+            setloginerror(true)
+         }
+       
+        } catch (err) {
+          console.error(err);
+          alert(err.message);
+        }
+      };
     const login = () =>{
         console.log("Login");
         setloggedinstatus(true)
@@ -26,9 +65,18 @@ export const AppProvider = ({children}) =>{
         setfounddata("Found");
         
      }
+     useEffect(()=>{
+        if (loading){
+            return
+        }
+        if (user){
+            setuserdata(user);
+            setloggedinstatus(true)
+        }
+     },[])
      
      return(
-        <AppContext.Provider value={{login,signup,userdata,lostdata,founddata,loggedinstatus}}> {children} </AppContext.Provider>
+        <AppContext.Provider value={{login,signup,userdata,lostdata,founddata,loggedinstatus,signInWithGoogle,loginerror}}> {children} </AppContext.Provider>
      )
 
      
