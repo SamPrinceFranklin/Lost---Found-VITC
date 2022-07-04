@@ -69,7 +69,7 @@ export const Login = () => {
               autoFocus={true}
               type={"text"}
               id="first-name"
-              onBlue={validatemail}
+              onBlur={validatemail}
               autoComplete="given-name"
               value={email}
               onChange={(e) => setemail(e.target.value)}
@@ -90,7 +90,7 @@ export const Login = () => {
               autoFocus={true}
               type={"password"}
               id="first-name"
-              onBlue={validatepwd}
+              onBlur={validatepwd}
               autoComplete="given-name"
               value={pwd}
               onChange={(e) => setpwd(e.target.value)}
