@@ -108,7 +108,7 @@ export const Login = () => {
         )}
         {loading && <Loader />}
         {!validated && !loading && (
-          <button className="bg-gray-600 text-gray-300 text-3xl p-4 rounded-full cursor-not-allowed">
+          <button className="bg-gray-600 text-white text-2xl font-bold p-3 rounded-lg cursor-not-allowed">
             LOGIN
           </button>
         )}
