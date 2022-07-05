@@ -6,16 +6,18 @@ import { Signup } from "../Authentication/Signup";
 import { Lost } from "../Lost/Lost";
 import { Founds } from "../Found/Founds";
 import { Landing } from "../Landing/Landing";
+import { AddLost } from "../Lost/AddLost";
 
 export const Main = () => {
   return (
     <Routes>
-      <Route exact path="/" element={<Landing />} />
+      <Route exact path="/" element={<Dashboard />} />
       <Route exact path="/home" element={<Dashboard />} />
       <Route exact path="/explore" element={<Landing />} />
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/signup" element={<Signup />} />
       <Route exact path="/lost" element={<Lost />} />
+      <Route exact path="/addlost" element={<AddLost />} />
       <Route exact path="/found" element={<Founds />} />
     </Routes>
   );

@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import lostImage from "../../lostIcon.png";
 import foundImage from "../../foundIcon.png";
+import { AppContext } from "../../context/AppContext";
 
 export const Landing = () => {
+  const {loggedinstatus,loginerror} = useContext(AppContext)
   return (
     <div className="w-full h-full lg:h-screen flex flex-col bg-gradient-to-tr from-green-500 to-blue-500">
+           {!loggedinstatus && (
+        <div className="flex flex-col ">
+          <div>
+            {" "}
+            {loginerror && (
+              <div className="text-red-700 font-bold text-xl">
+                Only VIT mail id is allowed
+              </div>
+            )}{" "}
+          </div>
+          {/* <Landing /> */}
+        </div>
+      )}
+     
+     
       <div className="flex justify-center p-8">
         <p className="text-2xl font-bold text-white">
           Lost an item and are not able to find it? <br />

@@ -33,7 +33,7 @@ export const Dashboard = () => {
               </div>
             )}{" "}
           </div>
-          {/* <Landing /> */}
+          <Landing />
         </div>
       )}
     </>

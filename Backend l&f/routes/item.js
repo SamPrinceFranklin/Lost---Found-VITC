@@ -19,6 +19,14 @@ const lostSchema= new mongoose.Schema({
     tag:{
         type:String,
         required:true
+    },
+    imgUrl:{
+        type:String,
+        required:true
+    },
+    at:{
+        type:String,
+        required:true 
     }
    
 })
