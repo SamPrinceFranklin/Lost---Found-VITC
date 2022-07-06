@@ -39,9 +39,12 @@ export const AppProvider = ({children}) =>{
          if (user.email.includes("vitstudent.ac.in")||user.email.includes("vit.ac.in")  ){
             setloggedinstatus(true);
             setuserdata(user)
+            console.log(userdata)
          }
          else{
             setloginerror(true)
+            signOut(auth)
+            
          }
        
         } catch (err) {
@@ -65,15 +68,25 @@ export const AppProvider = ({children}) =>{
         setfounddata("Found");
         
      }
+     const signOut = async() =>{
+      const res = await signOut(auth);
+      setloggedinstatus(false)
+     }
      useEffect(()=>{
         if (loading){
             return
         }
         if (user){
-            setuserdata(user);
-            setloggedinstatus(true)
+          if (user.email.includes("vitstudent.ac.in")||user.email.includes("vit.ac.in")  ){
+            setloggedinstatus(true);
+            setuserdata(user)
+            console.log(userdata)
+         }
+         else{
+          signOut(auth)
+         }
         }
-     },[])
+     },[user,loading])
      
      return(
         <AppContext.Provider value={{login,signup,userdata,lostdata,founddata,loggedinstatus,signInWithGoogle,loginerror}}> {children} </AppContext.Provider>
